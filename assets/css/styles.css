@@ -1,3 +1,18 @@
 body {
-    background-color: grey;
+  background-color: #81c6e8;
+}
+.header-info {
+  display: flex;
+  justify-content: space-around;
+}
+.main-style {
+  margin-top: 10%;
+}
+.center {
+  display: flex;
+  justify-content: center;
+}
+
+div button {
+    margin-top: 10px;
 }
