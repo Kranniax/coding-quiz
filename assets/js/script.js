@@ -41,11 +41,9 @@ var quizQuestions = [
   },
 ];
 
-
-var quizAnswer = function (){
+var quizAnswer = function () {
   alert("I've been clicked");
 };
-
 
 // show quiz questions and their corresponding options.
 var showQuestions = function () {
@@ -57,19 +55,14 @@ var showQuestions = function () {
   quizTitleEl.textContent = quizQuestion.question;
 
   // create quiz options.
-  quizQuestion.options.forEach( function (element){
-   var optionBTN = document.createElement("button");
-   optionBTN.textContent = element;
-   optionBTN.addEventListener("click", quizAnswer);
-   quizInfoSection.appendChild(optionBTN);
+  quizQuestion.options.forEach(function (element) {
+    var optionBTN = document.createElement("button");
+    optionBTN.textContent = element;
+    optionBTN.addEventListener("click", quizAnswer);
+    quizInfoSection.appendChild(optionBTN);
   });
-
-
-
-
-
 };
-// quiz countdown timer function. 
+// quiz countdown timer function.
 var countdown = function () {
   var countDownInterval = setInterval(function () {
     timerEl.innerHTML = "Time: " + timerCountDown + " secs";
@@ -83,7 +76,7 @@ var countdown = function () {
 };
 // the initial start of the coding quiz.
 var startQuiz = function () {
-    buttonEl.remove();
+  buttonEl.remove();
 
   // start the timer countdown.
   countdown();
