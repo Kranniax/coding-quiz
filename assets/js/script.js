@@ -40,9 +40,22 @@ var quizQuestions = [
     answer: "Cassandra",
   },
 ];
+// compare the selected quiz answer.
+var quizAnswer = function (event) {
+  console.log(event.target.value);
 
-var quizAnswer = function () {
-  alert("I've been clicked");
+  selectedAnswer = event.target.value;
+
+  if (selectedAnswer === quizQuestions[quizQuestionIndex].answer) {
+    finalScore = finalScore + 10;
+    quizQuestionIndex++;
+    showQuestions();
+  } else {
+    console.log("You are wrong");
+    quizQuestionIndex++;
+    timerCountDown = timerCountDown - 10;
+    showQuestions();
+  }
 };
 
 // show quiz questions and their corresponding options.
@@ -52,11 +65,14 @@ var showQuestions = function () {
   // locate quiz question within the array.
   var quizQuestion = quizQuestions[quizQuestionIndex];
 
+  
   quizTitleEl.textContent = quizQuestion.question;
 
   // create quiz options.
   quizQuestion.options.forEach(function (element) {
     var optionBTN = document.createElement("button");
+    optionBTN.className = "option-style";
+    optionBTN.setAttribute("value", element);
     optionBTN.textContent = element;
     optionBTN.addEventListener("click", quizAnswer);
     quizInfoSection.appendChild(optionBTN);
@@ -65,11 +81,11 @@ var showQuestions = function () {
 // quiz countdown timer function.
 var countdown = function () {
   var countDownInterval = setInterval(function () {
-    timerEl.innerHTML = "Time: " + timerCountDown + " secs";
+    timerEl.textContent = timerCountDown + " secs";
     timerCountDown--;
 
     if (timerCountDown === 0) {
-      timerEl.innerHTML = "Times Up !";
+      timerEl.textContent = "Times Up !";
       clearInterval(countDownInterval);
     }
   }, 1000);
