@@ -4,7 +4,7 @@ var quizTitleEl = document.querySelector(".quiz-title h1");
 var quizInfoEl = document.querySelector(".quiz-info p");
 var quizInfoSection = document.querySelector(".quiz-info");
 var timerCountDown = 60;
-var finalScore;
+var finalScore = 0;
 var quizQuestionIndex = 0;
 var quizQuestions = [
   {
@@ -48,12 +48,18 @@ var quizAnswer = function (event) {
 
   if (selectedAnswer === quizQuestions[quizQuestionIndex].answer) {
     finalScore = finalScore + 10;
+    console.log("Your Current Score is: " + finalScore);
     quizQuestionIndex++;
     showQuestions();
   } else {
     console.log("You are wrong");
-    quizQuestionIndex++;
+
     timerCountDown = timerCountDown - 10;
+    quizQuestionIndex++;
+
+    // if (time < 0) {
+    //   time = 0;
+    // }
     showQuestions();
   }
 };
@@ -65,15 +71,20 @@ var showQuestions = function () {
   // locate quiz question within the array.
   var quizQuestion = quizQuestions[quizQuestionIndex];
 
-  
   quizTitleEl.textContent = quizQuestion.question;
 
+  // clear previous options
+  quizInfoSection.innerHTML = "";
+
+  var letters = ["a", "b", "c", "d"];
+
   // create quiz options.
-  quizQuestion.options.forEach(function (element) {
+  quizQuestion.options.forEach(function (element, i) {
+    quizInfoSection.className = "options-container";
     var optionBTN = document.createElement("button");
     optionBTN.className = "option-style";
     optionBTN.setAttribute("value", element);
-    optionBTN.textContent = element;
+    optionBTN.textContent = letters[i] + ". " + element;
     optionBTN.addEventListener("click", quizAnswer);
     quizInfoSection.appendChild(optionBTN);
   });
@@ -87,6 +98,7 @@ var countdown = function () {
     if (timerCountDown === 0) {
       timerEl.textContent = "Times Up !";
       clearInterval(countDownInterval);
+      // endquiz();
     }
   }, 1000);
 };
