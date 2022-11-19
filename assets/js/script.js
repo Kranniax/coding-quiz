@@ -3,8 +3,9 @@ var timerEl = document.querySelector(".timer-count");
 var quizTitleEl = document.querySelector(".quiz-title h1");
 var quizInfoEl = document.querySelector(".quiz-info p");
 var quizInfoSection = document.querySelector(".quiz-info");
+var countDownInterval;
 var timerCountDown = 60;
-var finalScore = 0;
+var score = 0;
 var quizQuestionIndex = 0;
 var quizQuestions = [
   {
@@ -40,26 +41,29 @@ var quizQuestions = [
     answer: "Cassandra",
   },
 ];
-// compare the selected quiz answer.
-var quizAnswer = function (event) {
-  console.log(event.target.value);
 
-  selectedAnswer = event.target.value;
+var endQuiz = function () {
+  console.log("Quiz has ended!");
+};
+// compare the selected quiz answer.
+var quizAnswer = function () {
+  // console.log(event.target.value);
+  console.log("The selected answer is: " + this.value);
+
+  selectedAnswer = this.value;
 
   if (selectedAnswer === quizQuestions[quizQuestionIndex].answer) {
-    finalScore = finalScore + 10;
-    console.log("Your Current Score is: " + finalScore);
-    quizQuestionIndex++;
-    showQuestions();
+    score = score + 10;
+    console.log("Correct! | Current Score is: " + score);
   } else {
     console.log("You are wrong");
-
     timerCountDown = timerCountDown - 10;
-    quizQuestionIndex++;
+  }
+  quizQuestionIndex++;
 
-    // if (time < 0) {
-    //   time = 0;
-    // }
+  if (quizQuestionIndex === quizQuestions.length) {
+    endQuiz();
+  } else {
     showQuestions();
   }
 };
@@ -91,14 +95,14 @@ var showQuestions = function () {
 };
 // quiz countdown timer function.
 var countdown = function () {
-  var countDownInterval = setInterval(function () {
+  countDownInterval = setInterval(function () {
     timerEl.textContent = timerCountDown + " secs";
     timerCountDown--;
 
     if (timerCountDown === 0) {
       timerEl.textContent = "Times Up !";
+      endquiz();
       clearInterval(countDownInterval);
-      // endquiz();
     }
   }, 1000);
 };
