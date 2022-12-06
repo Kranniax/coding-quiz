@@ -43,6 +43,7 @@ var quizQuestions = [
 ];
 
 var endQuiz = function () {
+  clearInterval(countDownInterval);
   console.log("Quiz has ended!");
 };
 // compare the selected quiz answer.
@@ -99,10 +100,9 @@ var countdown = function () {
     timerEl.textContent = timerCountDown + " secs";
     timerCountDown--;
 
-    if (timerCountDown === 0) {
+    if (timerCountDown <= 0) {
       timerEl.textContent = "Times Up !";
-      endquiz();
-      clearInterval(countDownInterval);
+      endQuiz();
     }
   }, 1000);
 };
