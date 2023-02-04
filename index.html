@@ -13,7 +13,7 @@
       <p>Time: <span class="timer-count"></span></p>
     </header>
     <main class="main-style">
-      <section>
+      <section id="quiz-section">
         <div class="center quiz-title">
           <h1>Coding Quiz Challenge</h1>
         </div>
@@ -33,6 +33,17 @@
       <div class="center">
         <button class="str-quiz-button">Start Quiz</button>
       </div>
+      <form action="" class="hide" id="initial-form">
+        <label for="initials">Enter initials:</label>
+        <input
+          type="text"
+          class="form-control input-initials"
+          name="initials"
+          id="initials"
+          placeholder="Enter your Initials"
+        />
+        <button class="btn btn-primary submit-btn">Submit</button>
+      </form>
     </main>
 
     <p></p>

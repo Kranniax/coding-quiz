@@ -3,10 +3,14 @@ var timerEl = document.querySelector(".timer-count");
 var quizTitleEl = document.querySelector(".quiz-title h1");
 var quizInfoEl = document.querySelector(".quiz-info p");
 var quizInfoSection = document.querySelector(".quiz-info");
+var quizSectionEl = document.querySelector("#quiz-section");
+var initalFormEl = document.querySelector("#initial-form");
+var initialsInput = document.querySelector(".input-initials");
 var countDownInterval;
 var timerCountDown = 60;
 var score = 0;
 var quizQuestionIndex = 0;
+var highScore = [];
 var quizQuestions = [
   {
     question: "Javascript is an _______ language?",
@@ -44,7 +48,16 @@ var quizQuestions = [
 
 var endQuiz = function () {
   clearInterval(countDownInterval);
-  console.log("Quiz has ended!");
+  timerEl.textContent = "Times Up !";
+
+  // TODO: After End Quiz
+  quizTitleEl.textContent = "Your Final Quiz Score: " + score + " points.";
+  quizInfoSection.innerHTML = "";
+
+  // Showcase initials form
+  initalFormEl.classList.remove("hide");
+
+  initalFormEl.addEventListener("submit", saveScores);
 };
 // compare the selected quiz answer.
 var quizAnswer = function () {
@@ -55,7 +68,7 @@ var quizAnswer = function () {
 
   if (selectedAnswer === quizQuestions[quizQuestionIndex].answer) {
     score = score + 10;
-    console.log("Correct! | Current Score is: " + score);
+    // console.log("Correct! | Current Score is: " + score);
   } else {
     console.log("You are wrong");
     timerCountDown = timerCountDown - 10;
@@ -97,11 +110,10 @@ var showQuestions = function () {
 // quiz countdown timer function.
 var countdown = function () {
   countDownInterval = setInterval(function () {
-    timerEl.textContent = timerCountDown + " secs";
-    timerCountDown--;
-
-    if (timerCountDown <= 0) {
-      timerEl.textContent = "Times Up !";
+    if (timerCountDown >= 0) {
+      timerEl.textContent = timerCountDown + " secs";
+      timerCountDown--;
+    } else {
       endQuiz();
     }
   }, 1000);
@@ -116,4 +128,14 @@ var startQuiz = function () {
   showQuestions();
 };
 
+var saveScores = function (event) {
+  event.preventDefault();
+  var initials = initialsInput.value.trim();
+
+  if (initials != "") {
+  }
+};
+var loadScores = function () {};
+
 buttonEl.addEventListener("click", startQuiz);
+loadScores();
