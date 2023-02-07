@@ -65,6 +65,7 @@ var saveScores = function (event) {
   if (!initials) {
     return false;
   }
+
   var highScores = JSON.parse(localStorage.getItem("scores")) || [];
 
   // save user initials and score inside an object array.
