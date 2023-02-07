@@ -10,7 +10,6 @@ var countDownInterval;
 var timerCountDown = 60;
 var score = 0;
 var quizQuestionIndex = 0;
-var highScore = [];
 var quizQuestions = [
   {
     question: "Javascript is an _______ language?",
@@ -36,7 +35,7 @@ var quizQuestions = [
   {
     question:
       "Which function is used to serialize an object into a JSON string in Javascript?",
-    options: ["stringify", "parse()", "convert()", "None of the above"],
+    options: ["stringify()", "parse()", "convert()", "None of the above"],
     answer: "stringify()",
   },
   {
@@ -59,6 +58,29 @@ var endQuiz = function () {
 
   initalFormEl.addEventListener("submit", saveScores);
 };
+
+var saveScores = function (event) {
+  var initials = initialsInput.value.trim();
+
+  if (!initials) {
+    return false;
+  }
+  var highScores = JSON.parse(localStorage.getItem("scores")) || [];
+
+  // save user initials and score inside an object array.
+  var userScore = {
+    initials: initials,
+    score: score,
+  };
+
+  // push new object into an object array.
+  highScores.push(userScore);
+  console.log(highScores);
+  // store new updated object array inside localStorage.
+  localStorage.setItem("scores", JSON.stringify(highScores));
+  location.reload();
+};
+var loadScores = function () {};
 // compare the selected quiz answer.
 var quizAnswer = function () {
   // console.log(event.target.value);
@@ -127,15 +149,6 @@ var startQuiz = function () {
   // start the quiz questions.
   showQuestions();
 };
-
-var saveScores = function (event) {
-  event.preventDefault();
-  var initials = initialsInput.value.trim();
-
-  if (initials != "") {
-  }
-};
-var loadScores = function () {};
 
 buttonEl.addEventListener("click", startQuiz);
 loadScores();
