@@ -9,7 +9,7 @@
   </head>
   <body>
     <header class="header-info">
-      <p>View High Scores</p>
+      <p class="view-scores">View High Scores</p>
       <p>Time: <span class="timer-count"></span></p>
     </header>
     <main class="main-style">
@@ -23,11 +23,6 @@
             limit. Keep in mind that incorrect answers will penalize your
             score/time by ten seconds!
           </p>
-
-          <!-- <button class="option-style"> Testing</button>
-          <button class="option-style"> Testing</button>
-          <button class="option-style"> Testing</button>
-          <button class="option-style"> Testing</button> -->
         </div>
       </section>
       <div class="center">
@@ -44,6 +39,9 @@
         />
         <button class="btn btn-primary submit-btn">Submit</button>
       </form>
+      <div class="high-scores hide">
+        <ol class="scores-list"></ol>
+      </div>
     </main>
 
     <p></p>

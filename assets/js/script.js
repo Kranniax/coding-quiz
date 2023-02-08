@@ -6,7 +6,11 @@ var quizInfoSection = document.querySelector(".quiz-info");
 var quizSectionEl = document.querySelector("#quiz-section");
 var initalFormEl = document.querySelector("#initial-form");
 var initialsInput = document.querySelector(".input-initials");
+var viewScoresEl = document.querySelector(".view-scores");
+var scoreListEl = document.querySelector(".scores-list");
+var highScoresEl = document.querySelector(".high-scores");
 var countDownInterval;
+var localHighScores = [];
 var timerCountDown = 60;
 var score = 0;
 var quizQuestionIndex = 0;
@@ -60,9 +64,12 @@ var endQuiz = function () {
 };
 
 var saveScores = function (event) {
+  event.preventDefault();
+
   var initials = initialsInput.value.trim();
 
   if (!initials) {
+    alert("Please enter your correct initials");
     return false;
   }
 
@@ -76,12 +83,32 @@ var saveScores = function (event) {
 
   // push new object into an object array.
   highScores.push(userScore);
-  console.log(highScores);
+
   // store new updated object array inside localStorage.
   localStorage.setItem("scores", JSON.stringify(highScores));
   location.reload();
 };
-var loadScores = function () {};
+var viewScores = function () {
+  var savedScores = JSON.parse(localStorage.getItem("scores")) || [];
+
+  savedScores.sort((a, b) => {
+    return b.score - a.score;
+  });
+
+  quizTitleEl.textContent = "High Scores";
+  quizInfoSection.innerHTML = "";
+
+  highScoresEl.classList.remove("hide");
+  scoreListEl.innerHTML = "";
+
+ for (var i = 0; i < savedScores.length; i++) {
+
+    var listItem = document.createElement("li");
+    listItem.textContent = savedScores[i].initials + " -- " + savedScores[i].score;
+    scoreListEl.appendChild(listItem);
+  }
+};
+
 // compare the selected quiz answer.
 var quizAnswer = function () {
   // console.log(event.target.value);
@@ -150,6 +177,6 @@ var startQuiz = function () {
   // start the quiz questions.
   showQuestions();
 };
-
+viewScoresEl.addEventListener("click", viewScores);
 buttonEl.addEventListener("click", startQuiz);
-loadScores();
+// loadScores();
