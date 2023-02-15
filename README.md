@@ -2,7 +2,7 @@
 
 ## Description
 
-A typical coding assessment with a combination of multiple-choice questions and interactive coding challenges.A technical assessment is a coding test that mirrors the real world work of a computer engineer at a company and asks the job applicant to complete a series of coding exercises in a developer environment that tests their skills as a programmer.
+A typical coding assessment with a combination of multiple-choice questions and interactive coding challenges. A technical assessment is a coding test that mirrors the real world work of a computer engineer at a company and asks the job applicant to complete a series of coding exercises in a developer environment that tests their skills as a programmer.
 
 ![Alt text](/assets/images/Screenshot%202023-02-14%20185822.jpg)
 
