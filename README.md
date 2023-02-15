@@ -13,7 +13,7 @@ A typical coding assessment with a combination of multiple-choice questions and 
 
 ## Deployed Website
 
-<https://kranniax.github.io/taskinator/>
+<https://kranniax.github.io/coding-quiz/>
 
 ## Contributions
 
