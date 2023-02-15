@@ -17,11 +17,9 @@ var viewScores = function () {
   }
 };
 
-returnButtonEl.addEventListener("click", function (){
-    location.href = "index.html";
-});
-viewScoresEl.addEventListener("click", function () {
-  location.href = "highScores.html";
-});
-
+var clearHighScores = function (){
+  localStorage.removeItem("scores");
+  location.reload();
+};
 viewScores();
+document.querySelector(".clr-scores").onclick = clearHighScores;

@@ -9,6 +9,7 @@ var initialsInput = document.querySelector(".input-initials");
 var viewScoresEl = document.querySelector(".view-scores");
 var scoreListEl = document.querySelector(".scores-list");
 var highScoresEl = document.querySelector(".high-scores");
+var feedbackEl = document.getElementById("feedback");
 var countDownInterval;
 var localHighScores = [];
 var timerCountDown = 60;
@@ -88,27 +89,6 @@ var saveScores = function (event) {
   localStorage.setItem("scores", JSON.stringify(highScores));
   location.reload();
 };
-// var viewScores = function () {
-//   var savedScores = JSON.parse(localStorage.getItem("scores")) || [];
-
-//   savedScores.sort((a, b) => {
-//     return b.score - a.score;
-//   });
-
-//   quizTitleEl.textContent = "High Scores";
-//   quizInfoSection.innerHTML = "";
-//   buttonEl.remove();
-
-//   highScoresEl.classList.remove("hide");
-//   scoreListEl.innerHTML = "";
-
-//   for (var i = 0; i < savedScores.length; i++) {
-//     var listItem = document.createElement("li");
-//     listItem.textContent =
-//       savedScores[i].initials + " -- " + savedScores[i].score;
-//     scoreListEl.appendChild(listItem);
-//   }
-// };
 
 // compare the selected quiz answer.
 var quizAnswer = function () {
@@ -119,11 +99,21 @@ var quizAnswer = function () {
 
   if (selectedAnswer === quizQuestions[quizQuestionIndex].answer) {
     score = score + 10;
+    feedbackEl.textContent = "Correct!";
     // console.log("Correct! | Current Score is: " + score);
   } else {
-    console.log("You are wrong");
     timerCountDown = timerCountDown - 10;
+    feedbackEl.textContent = "Wrong!";
+    // console.log("You are wrong");
   }
+
+  // flash right/wrong feedback on page for half a second
+  feedbackEl.setAttribute("class", "feedback");
+  setTimeout(function () {
+    feedbackEl.setAttribute("class", "feedback hide");
+  }, 1000);
+
+  // move to next question
   quizQuestionIndex++;
 
   if (quizQuestionIndex === quizQuestions.length) {
@@ -178,8 +168,4 @@ var startQuiz = function () {
   // start the quiz questions.
   showQuestions();
 };
-viewScoresEl.addEventListener("click", function (){
-  location.href = "highScores.html";
-});
 buttonEl.addEventListener("click", startQuiz);
-// loadScores();
