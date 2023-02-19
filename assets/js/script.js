@@ -51,6 +51,7 @@ var quizQuestions = [
 ];
 
 var endQuiz = function () {
+  // Stop Timer
   clearInterval(countDownInterval);
   timerEl.textContent = "Times Up !";
 
@@ -73,7 +74,8 @@ var saveScores = function (event) {
     alert("Please enter your correct initials");
     return false;
   }
-
+  // Check for local storage for an already existing list. If no list then set to
+  // empty array.
   var highScores = JSON.parse(localStorage.getItem("scores")) || [];
 
   // save user initials and score inside an object array.
@@ -92,19 +94,16 @@ var saveScores = function (event) {
 
 // compare the selected quiz answer.
 var quizAnswer = function () {
-  // console.log(event.target.value);
   console.log("The selected answer is: " + this.value);
-
+  // Get the value for the current object element. 
   selectedAnswer = this.value;
-
+  
   if (selectedAnswer === quizQuestions[quizQuestionIndex].answer) {
     score = score + 10;
     feedbackEl.textContent = "Correct!";
-    // console.log("Correct! | Current Score is: " + score);
   } else {
     timerCountDown = timerCountDown - 10;
     feedbackEl.textContent = "Wrong!";
-    // console.log("You are wrong");
   }
 
   // flash right/wrong feedback on page for half a second
